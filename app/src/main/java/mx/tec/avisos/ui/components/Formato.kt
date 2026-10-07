@@ -32,7 +32,7 @@ fun tiempoRelativo(creadoEn: String, ahora: Long = System.currentTimeMillis()): 
     val minutos = (ahora - instante) / 60_000
     return when {
         minutos < 1 -> "ahora"
-        minutos < 60 -> "hace $minutos min"
+        minutos <= 60 -> "hace $minutos min"
         minutos < 24 * 60 -> "hace ${minutos / 60} h"
         esAyer(instante, ahora) -> "ayer"
         else -> SimpleDateFormat("d MMM", Locale.forLanguageTag("es-MX")).format(instante).trimEnd('.')
@@ -58,5 +58,5 @@ private fun mismoDia(a: Long, b: Long): Boolean {
     val ca = Calendar.getInstance().apply { timeInMillis = a }
     val cb = Calendar.getInstance().apply { timeInMillis = b }
     return ca.get(Calendar.YEAR) == cb.get(Calendar.YEAR) &&
-        ca.get(Calendar.DAY_OF_YEAR) == cb.get(Calendar.DAY_OF_YEAR)
+            ca.get(Calendar.DAY_OF_YEAR) == cb.get(Calendar.DAY_OF_YEAR)
 }
